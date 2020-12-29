@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +8,7 @@ class Role extends Model
 {
     //
 
-    public function users(){
+    public function admin(){
         return $this->hasMany(User::class);
     }
 }

@@ -79,7 +79,10 @@
                             </button>
 
                         </div>
-                        <a href="/"> <- Go back page Shop</a>
+
+                        <div class="form-control-sm">
+                            <a href="/"> ← Go to Shop page</a>
+                        </div>
 
                     </form>
                 </div>

@@ -3,7 +3,7 @@
 @section('content')
     <!-- main area -->
     <div class="main-content">
-
+        <!-- dashboard area -->
         <div class="content-view">
             <div class="row">
                 <!-- Cart View area -->
@@ -77,6 +77,7 @@
                 </div>
             </div>
 
+            <!-- content area -->
             <ul class="list-group">
                 <li class="list-group-item notification-bar-fail">
                     <div href="#" class="notification-bar-icon">
