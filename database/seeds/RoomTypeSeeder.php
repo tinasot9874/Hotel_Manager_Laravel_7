@@ -12,19 +12,24 @@ class RoomTypeSeeder extends Seeder
     public function run()
     {
         DB::table('room_types')->insert([
-            'name' => 'Standard',
-            'slug' => 'STD',
-            'description' => ''
+            'name' => 'Standard - STD',
+            'slug' => 'standart-std',
+            'common_price' => 2000000,
+            'description' => 'Phòng Standard, được thiết kế theo phong cách đương đại mới trang nhã, có cửa sổ kính bố trí suốt từ sàn lên trần đem đến quang cảnh thành phố tuyệt đẹp hay quang cảnh sông thơ mộng.
+Mỗi phòng đều có khu làm việc và khu thư giãn riêng biệt với ti vi truyền hình cáp/vệ tinh màn hình LCD, và một giường cỡ lớn hoặc hai giường đôi được trang bị gối sợi cực mịn và chăn cao cấp.Phòng tắm bằng đá cẩm thạch rộng rãi có một bồn tắm, bàn trang điểm lớn và bồn vệ sinh bidet điện có điện thoại. Du khách có thể lựa chọn tầng hút thuốc hoặc không hút thuốc.'
         ]);
         DB::table('room_types')->insert([
-            'name' => 'Superior',
-            'slug' => 'SUP',
-            'description' => ''
+            'name' => 'Superior - SUP',
+            'slug' => 'superior-sup',
+            'common_price' => 3500000,
+            'description' => 'Phòng Superior, được thiết kế theo phong cách đương đại mới trang nhã, có cửa sổ kính bố trí suốt từ sàn lên trần đem đến quang cảnh thành phố tuyệt đẹp hay quang cảnh sông thơ mộng.
+Mỗi phòng đều có khu làm việc và khu thư giãn riêng biệt với ti vi truyền hình cáp/vệ tinh màn hình LCD, và một giường cỡ lớn hoặc hai giường đôi được trang bị gối sợi cực mịn và chăn cao cấp.Phòng tắm bằng đá cẩm thạch rộng rãi có một bồn tắm, bàn trang điểm lớn và bồn vệ sinh bidet điện có điện thoại. Du khách có thể lựa chọn tầng hút thuốc hoặc không hút thuốc.'
         ]);
         DB::table('room_types')->insert([
-            'name' => 'Delux',
-            'slug' => 'DLX',
-            'description' => 'Tại tất cả các phòng Deluxe nằm từ tầng 40 đến tầng 53 của toà nhà Lotte, khách hàng đều có thể tận hưởng tầm nhìn tuyệt đẹp bao quát thành phố Hà Nội. Các tiện nghi cao cấp bao gồm hệ thống điều hoà độc đáo với 4 ống sẽ bảo đảm cho khách hàng những giờ phút nghỉ ngơi thoải mái tại khách sạn.'
-        ]);
+            'name' => 'Delux - DLX',
+            'slug' => 'delux-dlx',
+            'common_price' => 4500000,
+            'description' => 'Phòng Deluxe, được thiết kế theo phong cách đương đại mới trang nhã, có cửa sổ kính bố trí suốt từ sàn lên trần đem đến quang cảnh thành phố tuyệt đẹp hay quang cảnh sông thơ mộng.
+Mỗi phòng đều có khu làm việc và khu thư giãn riêng biệt với ti vi truyền hình cáp/vệ tinh màn hình LCD, và một giường cỡ lớn hoặc hai giường đôi được trang bị gối sợi cực mịn và chăn cao cấp.Phòng tắm bằng đá cẩm thạch rộng rãi có một bồn tắm, bàn trang điểm lớn và bồn vệ sinh bidet điện có điện thoại. Du khách có thể lựa chọn tầng hút thuốc hoặc không hút thuốc.']);
     }
 }

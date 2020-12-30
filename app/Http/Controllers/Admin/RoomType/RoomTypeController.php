@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Admin\RoomType;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomType\CreateRoomTypeRequest;
+use App\Model\Admin\RoomType;
 use Illuminate\Http\Request;
 
 class RoomTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
-            return view('admin.roomtype.index');
+        $roomtype = RoomType::all();
+        return view('admin.roomtype.index')->with('roomtypes', $roomtype);
     }
 
     /**
@@ -33,7 +37,7 @@ class RoomTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRoomTypeRequest $request)
     {
         //
     }
@@ -55,9 +59,9 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RoomType $roomType)
     {
-        //
+            return view('admin.roomtype.edit')->with('roomtypes', $roomType);
     }
 
     /**
