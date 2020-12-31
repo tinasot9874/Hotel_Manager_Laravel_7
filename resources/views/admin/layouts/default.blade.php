@@ -23,9 +23,9 @@
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/dist/css/bootstrap.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/pace/themes/blue/pace-theme-minimal.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/font-awesome/css/font-awesome.css')}}"/>
-    <link rel="stylesheet" href="{{asset('vendor/animate.css/animate.css')}}"/>
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" />
     <!-- endbuild -->
 </head>
 <body>
@@ -85,14 +85,19 @@
 
 <script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.js')}}"></script>
-<script src="{{asset('scripts/constants.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 <script src="{{asset('scripts/main.js')}}"></script>
 <script src="{{asset('js/customize.js')}}"></script>
+<script>
+    // Display Toastr for Notify
+    @foreach(['success','error','info','warning'] as $type_toastr)
+        @if(session()->has($type_toastr))
+            toastr.{{$type_toastr}}('{{session()->get($type_toastr)}}')
+        @else
+        @endif
+    @endforeach
+</script>
 
-
-<!-- initialize page scripts -->
-{{--<script src="{{asset('scripts/dashboard/dashboard.js')}}"></script>--}}
-<!-- end initialize page scripts -->
 @yield('scripts')
 </body>
 </html>

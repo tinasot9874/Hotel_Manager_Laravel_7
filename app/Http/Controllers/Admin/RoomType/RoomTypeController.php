@@ -39,7 +39,25 @@ class RoomTypeController extends Controller
      */
     public function store(CreateRoomTypeRequest $request)
     {
-        //
+
+
+        // create slug
+        $slug = convert_to_slug($request->name);
+
+        // upload the image to storage
+        $feature_image = $request->file('feature_image')->store('roomtype_banner','public');
+
+        //store value into database
+        $roomtype = RoomType::create([
+            'name' => $request->name,
+            'slug'  => $slug,
+            'common_price' => $request->common_price,
+            'description'   => $request->description,
+            'feature_image' => $feature_image
+        ]);
+
+        session()->flash('success','Create Room Type Successfully!');
+        return redirect(route('admin.roomtype.index'));
     }
 
     /**

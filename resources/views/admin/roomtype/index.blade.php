@@ -37,7 +37,7 @@
                                             {{ $roomtype->name }}
                                         </h5>
                                         <div>
-                                            <img class="img-fluid" width="100%" src="@if(isset($roomtype->feature_image)) {{$roomtype->feature_image}} @else http://placeimg.com/200/100/any @endif" alt="">
+                                            <img class="img-fluid" width="100%" src="@if(isset($roomtype->feature_image)){{asset('storage/'.$roomtype->feature_image)}} @else http://placeimg.com/200/100/any @endif" alt="">
                                         </div>
                                     </td>
                                     <td width="30%">
@@ -71,7 +71,8 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <form class="ta">
+                                        <form class="ta" action="{{route('admin.roomtype.store')}}" method="POST" enctype="multipart/form-data">
+                                            @csrf
                                             <fieldset class="form-group">
                                                 <label for="name">
                                                     Tên loại phòng:
@@ -83,7 +84,7 @@
                                                     Giá tiền chung (VND):
                                                 </label>
                                                 <div class="input-group">
-                                                    <input type="text" min="1" id="common_price" class="form-control common_price"
+                                                    <input type="number" min="1" id="common_price" class="form-control"
                                                            name="common_price" placeholder="Giá tiền chung"
                                                            required aria-required="true" aria-invalid="true">
                                                     <div class="input-group-addon">
@@ -121,14 +122,13 @@
         </div>
     </div>
 @endsection
+
 @section('scripts')
 
-    <!-- initialize page scripts -->
-    <script type="text/javascript">
-        $('.common_price').simpleMoneyFormat();
-    </script>
+<script type="text/javascript">
 
 
 
-    <!-- end initialize page scripts -->
+    $('.common_price').simpleMoneyFormat();
+</script>
 @endsection
