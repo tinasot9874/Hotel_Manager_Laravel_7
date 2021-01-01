@@ -30,4 +30,11 @@ class CreateRoomTypeRequest extends FormRequest
             'feature_image' => 'required|image',
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Tên loại phòng không được trống',
+            'common_price.required' => 'Giá không được trống',
+        ];
+    }
 }

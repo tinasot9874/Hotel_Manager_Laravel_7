@@ -55,8 +55,9 @@ class RoomTypeController extends Controller
             'description'   => $request->description,
             'feature_image' => $feature_image
         ]);
-
-        session()->flash('success','Create Room Type Successfully!');
+        if ($roomtype){
+            toast('Tạo loại phòng thành công!','success')->position('top-end');
+        }
         return redirect(route('admin.roomtype.index'));
     }
 

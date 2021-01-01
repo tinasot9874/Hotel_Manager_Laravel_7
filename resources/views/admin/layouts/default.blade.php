@@ -20,12 +20,16 @@
 
 
     <!-- build:css({.tmp,app}) styles/app.min.css -->
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/dist/css/bootstrap.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/pace/themes/blue/pace-theme-minimal.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/font-awesome/css/font-awesome.css')}}"/>
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous"/>
     <!-- endbuild -->
 </head>
 <body>
@@ -57,7 +61,7 @@
                 <div class="navbar-search navbar-item">
                     <form class="search-form">
                         <i class="material-icons">search</i>
-                        <input class="form-control" type="text" placeholder="Search" />
+                        <input class="form-control" type="text" placeholder="Search"/>
                     </form>
                 </div>
             </div>
@@ -68,9 +72,7 @@
 
     </div>
     <!-- /content panel -->
-
 </div>
-
 <script type="text/javascript">
     window.paceOptions = {
         document: true,
@@ -78,26 +80,21 @@
         restartOnPushState: true,
         restartOnRequestAfter: true,
         ajax: {
-            trackMethods: [ 'POST','GET']
+            trackMethods: ['POST', 'GET']
         }
     };
 </script>
-
 <script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
 <script src="{{asset('scripts/main.js')}}"></script>
 <script src="{{asset('js/customize.js')}}"></script>
-<script>
-    // Display Toastr for Notify
-    @foreach(['success','error','info','warning'] as $type_toastr)
-        @if(session()->has($type_toastr))
-            toastr.{{$type_toastr}}('{{session()->get($type_toastr)}}')
-        @else
-        @endif
-    @endforeach
-</script>
 
+
+{{--<!-- page scripts -->--}}
+{{--<script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>--}}
+{{--<!-- end page scripts -->--}}
+@include('sweetalert::alert')
 @yield('scripts')
+
 </body>
 </html>
