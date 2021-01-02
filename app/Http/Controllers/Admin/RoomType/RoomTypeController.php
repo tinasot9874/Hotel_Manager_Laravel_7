@@ -17,7 +17,7 @@ class RoomTypeController extends Controller
 
     public function index()
     {
-        $roomtype = RoomType::all();
+        $roomtype = RoomType::paginate(4);
         return view('admin.roomtype.index')->with('roomtypes', $roomtype);
     }
 
@@ -101,8 +101,10 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RoomType $roomType)
+    public function destroy($slug)
     {
-
+        $roomType = RoomType::where('slug', $slug)->delete();
+        toast('Xoá loại phòng thành công!','success')->position('top-end');
+        return redirect()->back();
     }
 }

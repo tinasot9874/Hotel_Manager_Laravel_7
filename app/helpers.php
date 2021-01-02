@@ -17,3 +17,9 @@ if ( !function_exists("convert_to_slug")){
         return $str;
     }
 }
+// Rút gọn nội dung cho văn bản
+if (!function_exists('excerpt_text')){
+    function excerpt_text($col, $value){
+        return Str::limit($col,$value);
+    }
+}

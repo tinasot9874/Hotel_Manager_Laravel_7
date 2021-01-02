@@ -43,7 +43,7 @@
                                             </div>
                                         </td>
                                         <td width="30%">
-                                            {{ $roomtype->description }}
+                                            {{ excerpt_text($roomtype->description,250) }}
                                         </td>
                                         <td>
                                             <span class="common_price">{{$roomtype->common_price}}</span> VND
@@ -53,18 +53,20 @@
                                                     class="material-icons">create</span></a>
                                         </td>
                                         <td>
-                                            <form action="{{route('admin.roomtype.destroy', $roomtype->slug)}}" method="POST">
+                                            <button type="submit" class="btn btn-danger"
+                                                    onclick="deleteConfirmation('{{$roomtype->slug}}')">
+                                                <span class="material-icons">clear</span>
+                                            </button>
+                                            <form action="" method="post" id="deleteConfirmation">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
-                                                        class="material-icons">clear</button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $roomtypes->links() }}
                         </div>
                     </div>
                 </div>
@@ -160,8 +162,33 @@
 @endsection
 
 @section('scripts')
-
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     <script type="text/javascript">
         $('.common_price').simpleMoneyFormat();
+
+        function deleteConfirmation(slug) {
+            Swal.fire({
+                title: 'Xoá?',
+                icon: 'warning',
+                cancelButtonText: "Huỷ",
+                confirmButtonText: 'Xoá',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Đã xoá thành công!'
+                    ).then((result) => {
+                            if (result.isConfirmed) {
+                                var form = document.getElementById('deleteConfirmation')
+                                form.action = 'roomtype/' + slug;
+                                document.getElementById("deleteConfirmation").submit();
+                            }
+                        }
+                    )
+                }
+            })
+        }
     </script>
 @endsection

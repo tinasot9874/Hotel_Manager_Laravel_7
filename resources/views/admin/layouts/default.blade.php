@@ -6,7 +6,7 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"/>
     <meta name="msapplication-tap-highlight" content="no">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Milestone">
 

@@ -1,2 +1,7 @@
-<?php
-@dd($roomtypes)
+@extends('admin.layouts.default')
+@section('content')
+    
+
+
+
+@endsection
