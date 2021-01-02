@@ -53,8 +53,13 @@
                                                     class="material-icons">create</span></a>
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.roomtype.destroy', $roomtype->slug)}}"><span
-                                                    class="material-icons">clear</span></a>
+                                            <form action="{{route('admin.roomtype.destroy', $roomtype->slug)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="material-icons">clear</button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @endforeach

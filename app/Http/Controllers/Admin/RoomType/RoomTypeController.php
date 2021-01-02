@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomType\CreateRoomTypeRequest;
 use App\Model\Admin\RoomType;
 use Illuminate\Http\Request;
-
+use RealRashid\SweetAlert\Facades\Alert;
 class RoomTypeController extends Controller
 {
 
@@ -101,8 +101,8 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RoomType $roomType)
     {
-        //
+
     }
 }
