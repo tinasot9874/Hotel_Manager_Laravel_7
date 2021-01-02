@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin\RoomType;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomType\CreateRoomTypeRequest;
-use App\Model\Admin\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Model\Admin\RoomType;
 use RealRashid\SweetAlert\Facades\Alert;
 class RoomTypeController extends Controller
 {
@@ -78,9 +79,9 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(RoomType $roomType)
+    public function edit(RoomType $roomtype)
     {
-            return view('admin.roomtype.edit')->with('roomtypes', $roomType);
+        return view('admin.roomtype.edit')->with('roomtypes', $roomtype);
     }
 
     /**
@@ -90,9 +91,24 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RoomType $roomtype)
     {
-        //
+        $data = $request->only([
+            'name',
+            'common_price',
+            'description',
+        ]);
+
+        // handle image
+
+        $data['slug'] = convert_to_slug($request->name);
+        if ($request->hasFile('feature_image')) {
+            $image = $request->feature_image->store('roomtype_banner','public');
+            $data['feature_image'] = $image;
+        }
+        $roomtype->update($data);
+        toast('Cập nhật loại phòng thành công!','success')->position('top-end');
+        return redirect()->back();
     }
 
     /**

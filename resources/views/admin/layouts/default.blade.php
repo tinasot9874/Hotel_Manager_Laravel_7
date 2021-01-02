@@ -21,7 +21,6 @@
 
     <!-- build:css({.tmp,app}) styles/app.min.css -->
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/dist/css/bootstrap.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/pace/themes/blue/pace-theme-minimal.css')}}"/>
     <link rel="stylesheet" href="{{asset('vendor/font-awesome/css/font-awesome.css')}}"/>
@@ -56,7 +55,7 @@
                     <!-- /logo -->
                 </div>
                 <a class="navbar-item navbar-spacer-right navbar-heading hidden-md-down" href="#">
-                    <span>Dashboard</span>
+                    <span>@yield('title-page')</span>
                 </a>
                 <div class="navbar-search navbar-item">
                     <form class="search-form">

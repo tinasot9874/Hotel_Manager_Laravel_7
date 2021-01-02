@@ -49,14 +49,15 @@
                                             <span class="common_price">{{$roomtype->common_price}}</span> VND
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.roomtype.edit', $roomtype->slug)}}"><span
-                                                    class="material-icons">create</span></a>
+                                            <a href="{{route('admin.roomtype.edit', $roomtype->slug)}}">
+                                                <i class="fa fa-edit fa-2x"></i>
+                                            </a>
                                         </td>
                                         <td>
-                                            <button type="submit" class="btn btn-danger"
+                                            <a
                                                     onclick="deleteConfirmation('{{$roomtype->slug}}')">
-                                                <span class="material-icons">clear</span>
-                                            </button>
+                                                <i class="fa fa-close fa-2x"></i>
+                                            </a>
                                             <form action="" method="post" id="deleteConfirmation">
                                                 @csrf
                                                 @method('DELETE')
@@ -89,32 +90,33 @@
                                                 <label for="name">
                                                     Tên loại phòng:
                                                 </label>
-                                                <input type="text"
-                                                       class="form-control @error('name') is-invalid @enderror"
-                                                       id="name" name="name"
-                                                       placeholder="Tên loại phòng">
+                                                <div class="input-group @error('common_price') has-danger @enderror">
+                                                    <input type="text"
+                                                           class="form-control @error('name') form-control-danger @enderror"
+                                                           id="name" name="name"
+                                                           placeholder="Tên loại phòng">
 
-                                                @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                @enderror
-
+                                                    @error('name')
+                                                    <span class="has-danger" role="alert">
+                                                            <strong class="form-control-label">{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 <label class="name" for="common_price">
                                                     Giá tiền chung (VND):
                                                 </label>
-                                                <div class="input-group">
+                                                <div class="input-group @error('common_price') has-danger @enderror">
 
                                                     <input type="number" min="1" id="common_price"
-                                                           class="form-control @error('common_price') is-invalid @enderror"
+                                                           class="form-control @error('common_price') form-control-danger @enderror"
                                                            name="common_price" placeholder="Giá tiền chung"
                                                            aria-required="true" aria-invalid="true">
                                                     @error('common_price')
-                                                    <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <span class="has-danger" role="alert">
+                                                            <strong class="form-control-label">{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
                                             </fieldset>
@@ -130,13 +132,13 @@
                                                     Banner đại diện
                                                 </label>
                                                 <input id="feature_image" type="file" name="feature_image"
-                                                       class="@error('feature_image') is-invalid @enderror"
+                                                       class=" @error('feature_image') form-control-danger @enderror"
                                                        onchange="document.getElementById('preview_image').src = window.URL.createObjectURL(this.files[0])"
                                                        required="required">
                                                 @error('feature_image')
-                                                <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                <span class="has-danger" role="alert">
+                                                            <strong class="form-control-label">{{ $message }}</strong>
+                                                    </span>
                                                 @enderror
                                                 <fieldset class="form-group mt-2">
                                                     <img id="preview_image" width="100%">
