@@ -22,4 +22,8 @@ class RoomType extends Model
     public function room(){
         return $this->hasMany(Room::class);
     }
+
+    public function photo(){
+        return $this->hasMany(Photo::class);
+    }
 }

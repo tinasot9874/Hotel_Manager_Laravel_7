@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li>
-                <a href="admin/">
+                <a href="{{route('admin.service.index')}}">
                     <i class="material-icons text-primary">home</i>
                     <span>QL Dịch Vụ </span>
                 </a>

@@ -31,6 +31,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin'], fu
         Route::post('/logout/', 'Auth\LoginController@logout');
 
         Route::resource('roomtype', 'RoomType\RoomTypeController');
+        Route::resource('service', 'Service\ServiceController');
 });
 
 

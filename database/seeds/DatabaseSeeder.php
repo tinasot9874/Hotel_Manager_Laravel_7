@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
              AdminSeeder::class,
              BedTypeSeeder::class,
              RoomTypeSeeder::class,
-
+             ServiceSeeder::class,
          ]);
     }
 }
