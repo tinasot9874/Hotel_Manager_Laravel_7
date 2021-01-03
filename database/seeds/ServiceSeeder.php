@@ -13,6 +13,7 @@ class ServiceSeeder extends Seeder
     {
         DB::table('services')->insert([
             'name' => 'Phòng tập thể hình',
+            'slug' => 'phong-tap-the-hinh',
             'hotline' => 842838233333,
             'type' => 'Fitness',
             'status' => '1',
@@ -23,6 +24,7 @@ class ServiceSeeder extends Seeder
         ]);
         DB::table('services')->insert([
             'name' => 'Phòng Spa',
+            'slug' => 'phong-spa',
             'hotline' => 842838234444,
             'type' => 'Spa',
             'status' => '0',
@@ -33,6 +35,7 @@ class ServiceSeeder extends Seeder
         ]);
         DB::table('services')->insert([
             'name' => 'Bể bơi',
+            'slug' => 'be-boi',
             'hotline' => 842838235555,
             'type' => 'Fitness',
             'status' => '1',
@@ -43,6 +46,7 @@ class ServiceSeeder extends Seeder
         ]);
         DB::table('services')->insert([
             'name' => 'Dịch vụ Đưa đón',
+            'slug' => 'dich-vu-dua-don',
             'hotline' => 842838236666,
             'type' => 'Service',
             'status' => '0',
@@ -53,6 +57,7 @@ class ServiceSeeder extends Seeder
         ]);
         DB::table('services')->insert([
             'name' => 'Tiệc cưới',
+            'slug' => 'tiec-cuoi',
             'hotline' => 842838237777,
             'type' => 'Service',
             'status' => '1',
@@ -63,6 +68,7 @@ class ServiceSeeder extends Seeder
         ]);
         DB::table('services')->insert([
             'name' => 'Hội nghị',
+            'slug' => 'hoi-nghi',
             'hotline' => 842838238888,
             'type' => 'Service',
             'status' => '1',
