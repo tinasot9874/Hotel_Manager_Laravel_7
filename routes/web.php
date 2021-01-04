@@ -32,6 +32,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin'], fu
 
         Route::resource('roomtype', 'RoomType\RoomTypeController');
         Route::resource('service', 'Service\ServiceController');
+        Route::resource('coupon', 'Coupon\CouponController');
+        Route::resource('status', 'Status\StatusController');
+        Route::resource('facility', 'Facility\FacilityController');
 });
 
 

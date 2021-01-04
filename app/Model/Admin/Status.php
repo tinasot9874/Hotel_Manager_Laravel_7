@@ -13,4 +13,5 @@ class Status extends Model
     public function service(){
         return $this->hasMany(Service::class);
     }
+
 }

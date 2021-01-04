@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Service;
+namespace App\Http\Controllers\Admin\Coupon;
 
 use App\Http\Controllers\Controller;
-use App\Model\Admin\Service;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class CouponController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
-        return view('admin.service.index')->with('services', $services);
+        //
     }
 
     /**
@@ -46,10 +44,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show($id)
     {
-
-
+        //
     }
 
     /**
@@ -58,9 +55,9 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit($id)
     {
-        return view('admin.service.edit')->with('service', $service);
+        //
     }
 
     /**

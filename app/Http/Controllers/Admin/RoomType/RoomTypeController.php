@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\RoomType;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomType\CreateRoomTypeRequest;
+use App\Model\Admin\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Model\Admin\RoomType;
@@ -117,9 +118,9 @@ class RoomTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(RoomType $roomtype)
     {
-        $roomType = RoomType::where('slug', $slug)->delete();
+        $roomtype->delete();
         toast('Xoá loại phòng thành công!','success')->position('top-end');
         return redirect()->back();
     }
