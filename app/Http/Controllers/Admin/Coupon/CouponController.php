@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\Coupon;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Coupon\CreateCouponRequest;
+use App\Model\Admin\Coupon;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class CouponController extends Controller
 {
@@ -14,8 +17,10 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::all();
+        return view('admin.coupon.index')->with('coupons',$coupons);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,9 +38,18 @@ class CouponController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCouponRequest $request)
     {
-        //
+        $coupon = Coupon::create([
+            'name' => $request->name,
+            'discount'  => $request->discount,
+            'status' => 1,
+            'description'   => $request->description,
+        ]);
+        if ($coupon){
+            toast('Tạo mã khuyến mãi thành công!','success')->position('top-end');
+        }
+        return redirect(route('admin.coupon.index'));
     }
 
     /**
@@ -46,7 +60,8 @@ class CouponController extends Controller
      */
     public function show($id)
     {
-        //
+        $coupon = Coupon::find($id);
+        return response()->json($coupon);
     }
 
     /**
@@ -57,7 +72,8 @@ class CouponController extends Controller
      */
     public function edit($id)
     {
-        //
+        $coupon = Coupon::find($id);
+        return response()->json($coupon);
     }
 
     /**
@@ -69,7 +85,25 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+    }
+    public function updateWithAjax(Request $request)
+    {
+        $coupon = Coupon::find($request->coupon_id);
+        $coupon->discount = $request->discount;
+        $coupon->description = $request->description;
+        $coupon->save();
+        return response()->json($coupon);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $coupon = Coupon::find($request->coupon_id);
+
+        $coupon->status = $request->status;
+        $coupon->save();
+
+        return response()->json(['success'=>'Đổi trạng thái thành công!.']);
     }
 
     /**
@@ -80,6 +114,8 @@ class CouponController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $coupon = Coupon::find($id);
+        $coupon->delete();
+        return response()->json(['success'=>'Xoá thành công']);
     }
 }

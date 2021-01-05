@@ -9,6 +9,7 @@
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
                         <h3>Danh sách các dịch vụ</h3>
+                        <button style="float:right; width: 200px" class="btn btn-outline-info"><a href="{{route('admin.service.create')}}">Tạo mới</a></button>
                     </div>
                     <div class="card-block">
                         <div class="table-responsive">

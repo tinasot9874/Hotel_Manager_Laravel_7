@@ -17,9 +17,8 @@ class CreateCouponsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('discount');
+            $table->string('description')->nullable();
             $table->boolean('status',[0,1]);
-            $table->time('start_day');
-            $table->time('end_day');
             $table->timestamps();
         });
     }

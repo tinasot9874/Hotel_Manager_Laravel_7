@@ -35,6 +35,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'admin'], fu
         Route::resource('coupon', 'Coupon\CouponController');
         Route::resource('status', 'Status\StatusController');
         Route::resource('facility', 'Facility\FacilityController');
+        Route::post('coupon/changeStatus', 'Coupon\CouponController@changeStatus')->name('coupon.changeStatus');
+        Route::post('coupon/updateWithAjax', 'Coupon\CouponController@updateWithAjax')->name('coupon.updateWithAjax');
+
 });
 
 

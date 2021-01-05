@@ -38,7 +38,7 @@
                                             </h5>
                                             <div>
                                                 <img class="img-fluid" width="100%"
-                                                     src="@if(isset($roomtype->feature_image)){{asset('storage/'.$roomtype->feature_image)}} @else http://placeimg.com/200/100/any @endif"
+                                                     src="@if(isset($roomtype->feature_image)){{asset('storage/'.$roomtype->feature_image)}} @else http://placeimg.com/200/50/any @endif"
                                                      alt="">
                                             </div>
                                         </td>
@@ -46,17 +46,17 @@
                                             {{ excerpt_text($roomtype->description,250) }}
                                         </td>
                                         <td>
-                                            <span class="common_price">{{$roomtype->common_price}}</span> VND
+                                            <span class="common_price">{{$roomtype->common_price}}</span>
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.roomtype.edit', $roomtype->slug)}}">
-                                                <i class="fa fa-edit fa-2x"></i>
+                                            <a class="btn btn-outline-info" href="{{route('admin.roomtype.edit', $roomtype->slug)}}">
+                                                Chỉnh sửa
                                             </a>
                                         </td>
                                         <td>
-                                            <a
-                                                    onclick="deleteConfirmation('{{$roomtype->slug}}')">
-                                                <i class="fa fa-close fa-2x"></i>
+                                            <a class="btn btn-outline-danger"
+                                               onclick="deleteConfirmation('{{$roomtype->slug}}')">
+                                                Xoá
                                             </a>
                                             <form action="" method="post" id="deleteConfirmation">
                                                 @csrf
@@ -146,7 +146,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Submit
+                                                    Tạo mới
                                                 </button>
                                             </fieldset>
 

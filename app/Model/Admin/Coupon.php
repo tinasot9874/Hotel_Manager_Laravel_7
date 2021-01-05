@@ -10,8 +10,7 @@ class Coupon extends Model
         [
             'name',
             'discount',
+            'description',
             'status',
-            'start_day',
-            'end_day'
         ];
 }
