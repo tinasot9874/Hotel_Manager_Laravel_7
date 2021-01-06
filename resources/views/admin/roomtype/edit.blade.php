@@ -60,8 +60,7 @@
                                     </label>
                                     <input id="feature_image" type="file" name="feature_image"
                                            class=" @error('feature_image') form-control-danger @enderror"
-                                           onchange="document.getElementById('preview_image').src = window.URL.createObjectURL(this.files[0])"
-                                           required="required">
+                                           onchange="document.getElementById('preview_image').src = window.URL.createObjectURL(this.files[0])">
                                     @error('feature_image')
                                     <span class="has-danger" role="alert">
                                                             <strong class="form-control-label">{{ $message }}</strong>
@@ -91,7 +90,24 @@
 
 @endsection
 @section('scripts')
+    <!-- initialize page scripts -->
+    <script src="{{asset('vendor/ckeditor4/ckeditor.js')}}"></script>
+    <!-- initialize page scripts -->
     <script>
-        //$('.common_price').simpleMoneyFormat();
+        CKEDITOR.replace('description', {
+            extraPlugins: 'uploadimage,image2',
+            height: 300,
+
+            // Upload images to a CKFinder connector (note that the response type is set to JSON).
+            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+
+            filebrowserBrowseUrl: '/ckfinder/browser',
+
+            filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserWindowWidth: '1000',
+            filebrowserWindowHeight: '700'
+        });
+
+
     </script>
 @endsection

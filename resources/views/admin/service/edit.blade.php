@@ -80,13 +80,19 @@
                                                 <label for="hotline">
                                                     Thời gian hoạt động:
                                                 </label>
-                                                <div class="input-group @error('start_time') has-danger @enderror" style="display: flex;">
-                                                    <input style="width: 100px;" id="start_time" type="text" name="start_time" class="form-control @error('start_time') form-control-danger @enderror time-picker" value="{{$service->start_time}}">
+                                                <div class="input-group @error('start_time') has-danger @enderror"
+                                                     style="display: flex;">
+                                                    <input style="width: 100px;" id="start_time" type="text"
+                                                           name="start_time"
+                                                           class="form-control @error('start_time') form-control-danger @enderror time-picker"
+                                                           value="{{$service->start_time}}">
                                                     <span class="input-group-addon add-on" style="width: 50px;">
                                                         <i class="material-icons">access_time</i>
                                                     </span>
                                                     <label style="padding: 10px" for="">Đến</label>
-                                                    <input style="width: 100px;" type="text" name="end_time" class="form-control @error('end_time') form-control-danger @enderror time-picker" value="{{$service->end_time}}">
+                                                    <input style="width: 100px;" type="text" name="end_time"
+                                                           class="form-control @error('end_time') form-control-danger @enderror time-picker"
+                                                           value="{{$service->end_time}}">
                                                     <span class="input-group-addon add-on" style="width: 50px;">
                                                         <i class="material-icons">access_time</i>
                                                     </span>
@@ -112,9 +118,18 @@
                                                 <label for="status">
                                                     Trạng thái dịch vụ:
                                                 </label>
-                                                <select class="custom-select">
-                                                    <option value="0">Tạm dừng</option>
-                                                    <option value="1">Hoạt động</option>
+
+                                                <select class="custom-select" name="status">
+                                                    @if($service->status == 0)
+                                                        <option value="0" selected>Tạm dừng
+                                                        </option>
+                                                        <option value="1">Hoạt động</option>
+                                                    @else
+                                                        <option value="0">Tạm dừng</option>
+                                                        <option value="1" selected>Hoạt động
+                                                        </option>
+
+                                                    @endif
 
                                                 </select>
                                             </fieldset>
@@ -125,15 +140,15 @@
                                                 </label>
                                                 <input id="feature_image" type="file" name="feature_image"
                                                        class=" @error('feature_image') form-control-danger @enderror"
-                                                       onchange="document.getElementById('preview_image').src = window.URL.createObjectURL(this.files[0])"
-                                                       required="required">
+                                                       onchange="document.getElementById('preview_image').src = window.URL.createObjectURL(this.files[0])">
                                                 @error('feature_image')
                                                 <span class="has-danger" role="alert">
                                                             <strong class="form-control-label">{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                                 <fieldset class="form-group mt-2">
-                                                    <img src="{{asset($service->feature_image)}}" id="preview_image"
+                                                    <img src="{{asset('storage/'.$service->feature_image)}}"
+                                                         id="preview_image"
                                                          width="35%">
                                                 </fieldset>
                                             </fieldset>
@@ -159,22 +174,14 @@
 @section('scripts')
     <!-- initialize page scripts -->
     <script src="{{asset('vendor/ckeditor4/ckeditor.js')}}"></script>
-    <!-- initialize page scripts -->
-
-
     <script src="{{asset('vendor/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
     <script src="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
-   <!-- end page scripts -->
-
-    <!-- initialize page scripts -->
     <script>
         /******** Timepicker ********/
         $('.time-picker').timepicker();
     </script>
     <!-- end initialize page scripts -->
 
-    <!-- end initialize page scripts -->
-    <!-- initialize page scripts -->
     <script>
         CKEDITOR.replace('description', {
             extraPlugins: 'uploadimage,image2',
@@ -189,7 +196,6 @@
             filebrowserWindowWidth: '1000',
             filebrowserWindowHeight: '700'
         });
-
 
     </script>
 @endsection

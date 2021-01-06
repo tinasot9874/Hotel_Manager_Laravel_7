@@ -30,7 +30,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.service.create');
     }
 
     /**
@@ -39,9 +39,32 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        //
+        $data = $request->only([
+            'name',
+            'type',
+            'hotline',
+            'start_time',
+            'end_time',
+            'excerpt',
+            'description',
+            'status',
+        ]);
+        // handle image
+
+        $data['slug'] = convert_to_slug($request->name);
+        if ($request->hasFile('feature_image')) {
+            $image = $request->feature_image->store('service','public');
+            $data['feature_image'] = $image;
+        }
+        $service = Service::create($data);
+        if ($service) {
+            toast('Tạo mới dịch vụ thành công!', 'success');
+            return redirect()->back();
+        }else{
+            toast('Tạo mới thất bại, vui lòng thử lại!', 'error');
+        }
     }
 
     /**
@@ -76,7 +99,6 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-
         $data = $request->only([
             'name',
             'type',
@@ -85,8 +107,8 @@ class ServiceController extends Controller
             'end_time',
             'excerpt',
             'description',
+            'status',
         ]);
-
         // handle image
 
         $data['slug'] = convert_to_slug($request->name);
@@ -107,6 +129,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service = Service::find($id);
+        $service->delete();
+        return response()->json(['success' => 'Xoá dữ liệu thành công!']);
     }
 }

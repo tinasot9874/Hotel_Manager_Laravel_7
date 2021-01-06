@@ -231,7 +231,7 @@
                 });
             });
 
-            // Xoá mã bằng ajax
+            // Xoá dữ liệu bằng ajax
             $('.delete').on('click', function () {
                 var coupon_id = $(this).data('id');
                 Swal.fire({
@@ -269,10 +269,14 @@
                 })
             });
 
+            //Chỉnh sửa dữ liệu
             // lấy data qua method show (GET)
             $('.button_toggle_modal_edit').on('click', function () {
                 var coupon_id = $(this).data('id');
+                // Dùng $.get(url, function()) lấy data qua method GET
                 $.get('coupon/' + coupon_id, function (data) {
+
+                    // gán giá trị từ database vào input của modal
                     $('#id_model').val(data.id);
                     $('#name_model').val(data.name);
                     $('#discount_model').val(data.discount);
@@ -280,9 +284,9 @@
                 });
 
             });
-            // Lấy giá trị của form sau khi get data từ server
+            // Lấy giá trị của form sau khi thay đổi dữ liệu trên input modal
             $('#form_edit_modal').submit(function (e) {
-                e.preventDefault();
+                e.preventDefault(); // ngăn form submit
                 var coupon_id = $('#id_model').val();
                 var discount = $('#discount_model').val();
                 var description = $('#description_model').val();
@@ -291,7 +295,6 @@
                         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
                     }
                 });
-
                 $.ajax({
                     url: '{{route('admin.coupon.updateWithAjax')}}',
                     method: "post",
@@ -307,8 +310,8 @@
                         })
                         $('#trcoupon_'+data.id + ' td:nth-child(2)').text(data.description);
                         $('#trcoupon_'+data.id + ' td:nth-child(3)').text(data.discount).simpleMoneyFormat();
-                        $('.edit-coupon-modal').modal('toggle');
-                        $('#form_edit_modal')[0].reset();
+                        $('.edit-coupon-modal').modal('toggle'); // đóng modal
+                        $('#form_edit_modal')[0].reset(); // reset lại dữ liệu các trường của modal sau khi cập nhât
                     }
                 });
             });

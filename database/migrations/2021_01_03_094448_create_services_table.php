@@ -23,8 +23,8 @@ class CreateServicesTable extends Migration
             $table->string('type');
             $table->text('excerpt');
             $table->enum('status', [0,1]);
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
+            $table->string('start_time')->nullable();
+            $table->string('end_time')->nullable();
             $table->timestamps();
         });
     }
