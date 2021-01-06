@@ -96,11 +96,11 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.status.index')}}">
-                    <i class="material-icons text-success" aria-hidden="true">
-                        check_circle
+                <a href="{{route('admin.newsletter.index')}}">
+                    <i class="material-icons text-danger" aria-hidden="true">
+                        subscriptions
                     </i>
-                    <span>QL Trạng thái </span>
+                    <span>QL Newsletter </span>
                 </a>
             </li>
         </ul>

@@ -1,5 +1,9 @@
 @extends('admin.layouts.default')
 
+@section('css')
+
+@endsection
+
 @section('content')
     <!-- main area -->
     <div class="main-content">
@@ -16,9 +20,11 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        <form class="ta" action="{{route('admin.roomtype.store')}}" method="POST"
+                                        <form class="ta" action="{{route('admin.service.update', $service->slug)}}"
+                                              method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
+                                            @method('PUT')
                                             <fieldset class="form-group">
                                                 <label for="name">
                                                     Tên dịch vụ:
@@ -71,22 +77,48 @@
                                                 </div>
                                             </fieldset>
                                             <fieldset class="form-group">
-                                                <label for="status">
-                                                    Trạng thái dịch vụ:
+                                                <label for="hotline">
+                                                    Thời gian hoạt động:
                                                 </label>
-                                                <select class="custom-select">
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
+                                                <div class="input-group @error('start_time') has-danger @enderror" style="display: flex;">
+                                                    <input style="width: 100px;" id="start_time" type="text" name="start_time" class="form-control @error('start_time') form-control-danger @enderror time-picker" value="{{$service->start_time}}">
+                                                    <span class="input-group-addon add-on" style="width: 50px;">
+                                                        <i class="material-icons">access_time</i>
+                                                    </span>
+                                                    <label style="padding: 10px" for="">Đến</label>
+                                                    <input style="width: 100px;" type="text" name="end_time" class="form-control @error('end_time') form-control-danger @enderror time-picker" value="{{$service->end_time}}">
+                                                    <span class="input-group-addon add-on" style="width: 50px;">
+                                                        <i class="material-icons">access_time</i>
+                                                    </span>
+                                                </div>
+
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 <label for="excerpt">
-                                                    Mô tả:
+                                                    Mô tả ngắn:
                                                 </label>
                                                 <textarea class="form-control" id="excerpt" name="excerpt"
                                                           rows="">{{$service->excerpt}}</textarea>
                                             </fieldset>
+                                            <fieldset class="form-group">
+                                                <label for="description">
+                                                    Nội dung chi tiết dịch vụ:
+                                                </label>
+                                                <textarea class="form-control" id="description" name="description"
+                                                          data-sample-short
+                                                          rows="5">{{$service->description}}</textarea>
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <label for="status">
+                                                    Trạng thái dịch vụ:
+                                                </label>
+                                                <select class="custom-select">
+                                                    <option value="0">Tạm dừng</option>
+                                                    <option value="1">Hoạt động</option>
+
+                                                </select>
+                                            </fieldset>
+
                                             <fieldset class="form-group">
                                                 <label for="feature_image">
                                                     Banner đại diện
@@ -123,7 +155,41 @@
         </div>
     </div>
 @endsection
-
+@include('ckfinder::setup')
 @section('scripts')
+    <!-- initialize page scripts -->
+    <script src="{{asset('vendor/ckeditor4/ckeditor.js')}}"></script>
+    <!-- initialize page scripts -->
 
+
+    <script src="{{asset('vendor/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
+    <script src="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+   <!-- end page scripts -->
+
+    <!-- initialize page scripts -->
+    <script>
+        /******** Timepicker ********/
+        $('.time-picker').timepicker();
+    </script>
+    <!-- end initialize page scripts -->
+
+    <!-- end initialize page scripts -->
+    <!-- initialize page scripts -->
+    <script>
+        CKEDITOR.replace('description', {
+            extraPlugins: 'uploadimage,image2',
+            height: 300,
+
+            // Upload images to a CKFinder connector (note that the response type is set to JSON).
+            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+
+            filebrowserBrowseUrl: '/ckfinder/browser',
+
+            filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+            filebrowserWindowWidth: '1000',
+            filebrowserWindowHeight: '700'
+        });
+
+
+    </script>
 @endsection

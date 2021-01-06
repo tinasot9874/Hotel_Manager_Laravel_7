@@ -13,13 +13,13 @@ class Service extends Model
 
     protected $fillable = [
         'name',
-        'status_id',
         'slug',
-        'description',
         'feature_image',
-        'type',
         'hotline',
-        'is_service',
+        'excerpt',
+        'description',
+        'type',
+        'status',
         'start_time',
         'end_time'
     ];

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin\Service;
 use App\Http\Controllers\Controller;
 use App\Model\Admin\Service;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -70,9 +74,29 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
-        //
+
+        $data = $request->only([
+            'name',
+            'type',
+            'hotline',
+            'start_time',
+            'end_time',
+            'excerpt',
+            'description',
+        ]);
+
+        // handle image
+
+        $data['slug'] = convert_to_slug($request->name);
+        if ($request->hasFile('feature_image')) {
+            $image = $request->feature_image->store('service','public');
+            $data['feature_image'] = $image;
+        }
+        $service->update($data);
+        toast('Cập nhật dịch vụ thành công!','success');
+        return redirect()->back();
     }
 
     /**

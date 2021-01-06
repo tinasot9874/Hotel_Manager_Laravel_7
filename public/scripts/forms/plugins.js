@@ -4,24 +4,11 @@
 (function($) {
   'use strict';
 
-  /******** Color picker ********/
-  $('.color-picker').colorpicker();
-  $('.color-picker2').colorpicker({
-    horizontal: true
-  });
 
-  /******** Timepicker ********/
-  $('.time-picker').timepicker();
 
-  /******** Clockpicker ********/
-  $('.clockpicker').clockpicker({
-    donetext: 'Done'
-  });
 
-  /******** Input tags ********/
-  $('#tags').tagsInput({
-    width: 'auto'
-  });
+
+
 
   /******** Telephone input ********/
   $('.telephone-input').intlTelInput();
@@ -111,17 +98,7 @@
   /******** Select 2 plugin ********/
   $('.select2').select2();
 
-  /******** Selectize plguin ********/
-  $('#input-tags').selectize({
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-      return {
-        value: input,
-        text: input
-      };
-    }
-  });
+
   $('#select-beast').selectize({
     create: true,
     sortField: 'text'

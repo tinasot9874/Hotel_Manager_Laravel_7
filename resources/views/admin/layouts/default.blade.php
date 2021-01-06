@@ -18,6 +18,10 @@
     <title>Milestone - Bootstrap 4 Dashboard Template</title>
 
 
+    <link rel="stylesheet" href="{{asset('vendor/ui-select/dist/select.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/select2/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/selectize/dist/css/selectize.css')}}">
+
     <!-- build:css({.tmp,app}) styles/app.min.css -->
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/dist/css/bootstrap.css')}}"/>
@@ -27,6 +31,8 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
     <!-- endbuild -->
+    @yield('css')
+
 </head>
 <body>
 

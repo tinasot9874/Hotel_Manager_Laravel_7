@@ -90,7 +90,7 @@
                                                 <label for="name">
                                                     Tên loại phòng:
                                                 </label>
-                                                <div class="input-group @error('common_price') has-danger @enderror">
+                                                <div class="input-group @error('name') has-danger @enderror">
                                                     <input type="text"
                                                            class="form-control @error('name') form-control-danger @enderror"
                                                            id="name" name="name"
