@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Facility;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin\Facility;
 use Illuminate\Http\Request;
 
 class FacilityController extends Controller
@@ -14,7 +15,8 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        //
+        $facilities = Facility::all();
+        return view('admin.facility.index')->with('facilities', $facilities);
     }
 
     /**
@@ -35,7 +37,9 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $facility = Facility::create($data);
+        return redirect()->back();
     }
 
     /**
