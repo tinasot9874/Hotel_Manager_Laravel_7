@@ -15,33 +15,28 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="text-align: center;" width="5">
+                                    <th >
                                         icon
                                     </th>
-                                    <th style="text-align: center;">
+                                    <th>
                                         Mô tả
                                     </th>
-                                    <th colspan="2" style="text-align: center;">
+                                    <th>
                                         Hành động
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($facilities as $facility)
-                                    <tr>
+                                    <tr id="facility_{{$facility->id}}">
                                         <td class="text-center">
-                                            <img width="40" src="{{asset('storage/'.$facility->icon)}}" alt="">
+                                            <img width="40" src="{{$facility->icon}}" alt="">
                                         </td>
                                         <td>
                                             {{$facility->description}}
                                         </td>
                                         <td>
-                                            <a class="btn btn-outline-info">
-                                                Chỉnh sửa
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-danger">
+                                            <a class="btn btn-outline-danger delete" data-id="{{$facility->id}}">
                                                 Xoá
                                             </a>
                                         </td>
@@ -59,64 +54,48 @@
                         <h3>Tạo mới tiện ích</h3>
                     </div>
                     <div class="card-block">
-{{--                        <form class="form-inline" action="{{route('admin.facility.store')}}"--}}
-{{--                              method="POST" enctype="multipart/form-data">--}}
-{{--                            @csrf--}}
-{{--                            <fieldset class="form-group">--}}
-{{--                                --}}{{--                                                <label for="name">--}}
-{{--                                --}}{{--                                                    Icon (Lấy icon - <a class="text-success"--}}
-{{--                                --}}{{--                                                                        href="https://www.flaticon.com/"--}}
-{{--                                --}}{{--                                                                        target="_blank">Flaticon)</a>:--}}
-{{--                                --}}{{--                                                </label>--}}
-{{--                                --}}{{--                                                <div class="input-group @error('icon') has-danger @enderror">--}}
-{{--                                --}}{{--                                                    <input type="file"--}}
-{{--                                --}}{{--                                                           class="form-control @error('icon') form-control-danger @enderror sr-only"--}}
-{{--                                --}}{{--                                                           id="input-icon" name="icon" required>--}}
-{{--                                --}}{{--                                                    <button class="btn btn-primary" id="button_upload_icon">--}}
-{{--                                --}}{{--                                                        Tải icon--}}
-{{--                                --}}{{--                                                    </button>--}}
-{{--                                --}}{{--                                                    @error('icon')--}}
-{{--                                --}}{{--                                                    <span class="has-danger" role="alert">--}}
-{{--                                --}}{{--                                                            <strong class="form-control-label">{{ $message }}</strong>--}}
-{{--                                --}}{{--                                                    </span>--}}
-{{--                                --}}{{--                                                    @enderror--}}
-{{--                                --}}{{--                                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="inputPassword2" class="sr-only">--}}
-{{--                                        Password--}}
-{{--                                    </label>--}}
-{{--                                    <input type="password" class="form-control" id="inputPassword2"--}}
-{{--                                           placeholder="Password">--}}
-{{--                                </div>--}}
-{{--                                <button type="submit" class="btn btn-primary">--}}
-{{--                                    Confirm identity--}}
-{{--                                </button>--}}
-{{--                            </fieldset>--}}
+
+                        <form id="form_upload" action="{{route('admin.facility.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <fieldset class="form-group">
+                                <label for="name">Icon (<a class="text-success" href="https://www.flaticon.com/"
+                                                           target="_blank">Flaticon)</a>
+                                </label>
+                                <img id="preview_image" alt="" width="50px">
+                                <div class="form-group @error('icon') has-danger @enderror">
 
 
-{{--                        </form>--}}
-                        <div class="card-block">
-                            <form class="form-inline">
-                                <div class="form-group m-b-1">
-                                    <input type="text" class="form-control" id="input-icon" style="width:300px">
+                                    <input type="text"
+                                           class="form-control @error('icon') form-control-danger @enderror "
+                                           id="input-icon" name="icon" required style="display: none">
+
+
+                                    <button class="btn btn-primary btn-sm" id="button_upload_icon">
+                                        <i class="material-icons" aria-hidden="true">
+                                            file_upload
+                                        </i>
+                                    </button>
+
+                                    @error('icon')
+                                        <span class="has-danger" role="alert">
+                                            <strong class="form-control-label">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <button id="button_upload_icon" class="btn btn-primary m-b-1">
-                                    Upload icon
-                                </button>
-                                <fieldset class="form-group">
+                                <fieldset class="form-group m-t-2">
                                     <label for="description">
                                         Mô tả:
                                     </label>
-                                    <textarea class="form-control" id="description" name="description"
-                                              rows="1"></textarea>
+                                    <textarea class="form-control" id="description" name="description" required
+                                              rows="3"></textarea>
                                 </fieldset>
-                                <fieldset class="form-group">
-                                    <button type="submit" class="btn btn-primary">
-                                        Tạo mới
-                                    </button>
-                                </fieldset>
-                            </form>
-                        </div>
+                                <br>
+                            </fieldset>
+                            <button type="submit" class="btn btn-success m-t-2" style="float:right;">
+                                Tạo mới
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -128,27 +107,80 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     <script>
         var button_upload_icon = document.getElementById('button_upload_icon');
-        button_upload_icon.onclick = function () {
+        button_upload_icon.onclick = function (e) {
+            e.preventDefault();
             selectFileWithCKFinder('input-icon');
         };
-        function selectFileWithCKFinder( elementId ) {
-            CKFinder.popup( {
+
+        function selectFileWithCKFinder(elementId) {
+            CKFinder.popup({
                 chooseFiles: true,
                 width: 800,
                 height: 600,
-                onInit: function( finder ) {
-                    finder.on( 'files:choose', function( evt ) {
+                onInit: function (finder) {
+                    finder.on('files:choose', function (evt) {
                         var file = evt.data.files.first();
-                        var output = document.getElementById( elementId );
+                        var output = document.getElementById(elementId);
                         output.value = file.getUrl();
-                    } );
+                        document.getElementById('preview_image').src = file.getUrl();
+                    });
 
-                    finder.on( 'file:choose:resizedImage', function( evt ) {
-                        var output = document.getElementById( elementId );
+                    finder.on('file:choose:resizedImage', function (evt) {
+                        var output = document.getElementById(elementId);
                         output.value = evt.data.resizedUrl;
-                    } );
+                    });
                 }
-            } );
+            });
         }
+    </script>
+    <script>
+        // Xoá dữ liệu bằng ajax
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        $('.delete').on('click', function () {
+            var facility = $(this).data('id');
+            Swal.fire({
+                title: 'Xoá mã',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xoá!',
+                cancelButtonText: 'Trở về!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Đã xoá!',
+                    ).then((result) => {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        var url = 'facility/' + facility;
+                        $.ajax({
+                            url: url,
+                            method: "DELETE",
+                            success: function (data) {
+                                $('#facility_' + facility).hide();
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: data.success
+                                })
+                            }
+                        });
+                    })
+                }
+            })
+        });
     </script>
 @endsection

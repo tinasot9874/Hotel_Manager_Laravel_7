@@ -37,9 +37,7 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        $data['description'] = $request->description;
-        $data['icon'] = $request->file('icon')->store('service_icon','public');
-        $facility = Facility::create($data);
+        $facility = Facility::create($request->all());
         toast('Tạo mới tiện ích thành công!','success');
         return redirect()->back();
     }
@@ -86,6 +84,8 @@ class FacilityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $facility = Facility::find($id);
+        $facility->delete();
+        return response()->json(['success'=> 'Xoá thành công!']);
     }
 }
