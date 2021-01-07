@@ -183,19 +183,7 @@
     <!-- end initialize page scripts -->
 
     <script>
-        CKEDITOR.replace('description', {
-            extraPlugins: 'uploadimage,image2',
-            height: 300,
-
-            // Upload images to a CKFinder connector (note that the response type is set to JSON).
-            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
-
-            filebrowserBrowseUrl: '/ckfinder/browser',
-
-            filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-            filebrowserWindowWidth: '1000',
-            filebrowserWindowHeight: '700'
-        });
-
+        var editor = CKEDITOR.replace( 'description' );
+        CKFinder.setupCKEditor( editor );
     </script>
 @endsection

@@ -56,7 +56,7 @@
                                           {{$service->start_time}} ~ {{$service->end_time}}
                                         </td>
                                         <td>
-                                            <a class="btn btn-outline-info" href="{{route('admin.service.edit', $service->id)}}">
+                                            <a class="btn btn-outline-info" href="{{route('admin.service.edit', $service->slug)}}">
                                                 Chỉnh sửa
                                             </a>
                                         </td>
@@ -81,6 +81,7 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
     <script>
         $(document).ready(function () {
+            // setup Toastr
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -92,6 +93,7 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
+
             // Xoá dữ liệu bằng ajax
             $('.delete').on('click', function () {
                 var service_id = $(this).data('id');

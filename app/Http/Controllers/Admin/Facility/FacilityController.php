@@ -37,8 +37,10 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data['description'] = $request->description;
+        $data['icon'] = $request->file('icon')->store('service_icon','public');
         $facility = Facility::create($data);
+        toast('Tạo mới tiện ích thành công!','success');
         return redirect()->back();
     }
 
